@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Theme Variables (outside @layer — must stay dynamic at runtime) ──── */
+
+:root {
+  --c-black:  10 10 10;
+  --c-dark:   17 17 17;
+  --c-card:   26 26 26;
+  --c-border: 42 42 42;
+  --c-ivory:  245 240 232;
+  --c-muted:  154 154 154;
+  --bg-body:  #0A0A0A;
+  --fg-body:  #F5F0E8;
+  --scrollbar-track: #0A0A0A;
+}
+
+html.light-mode {
+  --c-black:  250 249 247;
+  --c-dark:   238 234 228;
+  --c-card:   255 255 255;
+  --c-border: 210 202 192;
+  --c-ivory:  22 22 22;
+  --c-muted:  108 100 92;
+  --bg-body:  #FAFAF7;
+  --fg-body:  #161616;
+  --scrollbar-track: #FAFAF7;
+}
+
+/* ── Base reset & global styles ─────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--bg-body);
+    color: var(--fg-body);
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+  ::-webkit-scrollbar-thumb { background: #C0392B; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #E74C3C; }
+}
+
+/* ── Component classes ───────────────────────────────────────────────────── */
+@layer components {
+  .section-label {
+    @apply text-xs font-semibold tracking-[0.3em] uppercase text-espresso-red font-sans;
+  }
+  .section-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-espresso-ivory leading-tight;
+  }
+  .section-subtitle {
+    @apply text-espresso-muted font-sans font-light leading-relaxed text-base md:text-lg;
+  }
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-espresso-red hover:bg-espresso-red-light text-white font-sans font-semibold text-sm tracking-widest uppercase px-8 py-4 transition-colors duration-300;
+  }
+  .btn-outline {
+    @apply inline-flex items-center gap-2 border border-espresso-border hover:border-espresso-red text-espresso-ivory hover:text-espresso-red font-sans font-semibold text-sm tracking-widest uppercase px-8 py-4 transition-colors duration-300;
+  }
+  .card-dark {
+    @apply bg-espresso-card border border-espresso-border;
+  }
+  .divider-red {
+    @apply w-12 h-0.5 bg-espresso-red;
+  }
+}
+
+/* ── Theme transition: smooth switch, never conflicts with motion animations ── */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition:
+    background-color 350ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color     350ms cubic-bezier(0.4, 0, 0.2, 1),
+    color            350ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill             350ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke           350ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow       350ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity          350ms cubic-bezier(0.4, 0, 0.2, 1) !important;
+  will-change: background-color, color, border-color;
+}
+
+/* ── Noise texture overlay ───────────────────────────────────────────────── */
+.noise-overlay::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
