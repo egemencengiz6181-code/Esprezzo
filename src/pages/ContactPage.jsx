@@ -18,9 +18,8 @@ const socials = [
 ]
 
 const hours = [
-  { day: 'Pazartesi – Cuma', hours: '07:00 – 22:00' },
-  { day: 'Cumartesi', hours: '08:00 – 23:00' },
-  { day: 'Pazar', hours: '09:00 – 21:00' },
+  { day: 'Pazartesi – Cuma', hours: '09:30 – 18:00' },
+  { day: 'Haftasonu', hours: 'Kapalı' },
 ]
 
 export default function ContactPage() {

@@ -53,9 +53,13 @@ export default function Hero() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="font-serif text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-[#F5F0E8] leading-none mb-6"
+          className="flex justify-center mb-6"
         >
-          Esprezzo
+          <img
+            src="/logo/Esprezzo%20logo%20beyaz.png"
+            alt="Esprezzo"
+            className="h-24 sm:h-28 md:h-32 lg:h-40 w-auto object-contain"
+          />
         </motion.h1>
 
         <motion.div

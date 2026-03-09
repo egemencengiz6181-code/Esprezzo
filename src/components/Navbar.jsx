@@ -44,15 +44,12 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-20">
           {/* Logo */}
-          <Link to="/" className="flex flex-col items-start group">
-            <span className={`font-serif text-2xl font-bold tracking-wide leading-none group-hover:text-espresso-red transition-colors duration-300 ${
-              !scrolled && isHome ? 'text-[#F5F0E8]' : 'text-espresso-ivory'
-            }`}>
-              ESPREZZO
-            </span>
-            <span className="text-[9px] tracking-[0.4em] uppercase text-espresso-red font-sans font-medium">
-              Premium Coffee
-            </span>
+          <Link to="/" className="flex items-center group">
+            <img
+              src="/logo/Esprezzo%20logo%20beyaz.png"
+              alt="Esprezzo"
+              className="h-10 w-auto object-contain transition-opacity duration-300 group-hover:opacity-75"
+            />
           </Link>
 
           {/* Desktop nav */}

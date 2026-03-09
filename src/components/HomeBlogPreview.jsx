@@ -2,36 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Clock } from 'lucide-react'
-
-const posts = [
-  {
-    id: 1,
-    category: 'Kahve Kültürü',
-    title: 'Üçüncü Dalga Kahvenin Yükselişi: Bir Fincanın Ötesinde',
-    excerpt: 'Kahve artık yalnızca bir içecek değil — bir felsefe, bir yaşam biçimi. Dünya genelinde yükselen hareket, kahveyi gerçek anlamda sanat formuna taşıdı.',
-    readTime: '6 dk',
-    date: '12 Şubat 2026',
-    image: 'https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 2,
-    category: 'Demleme Rehberi',
-    title: 'Pour Over Sanatı: Mükemmel V60 için 7 Altın Kural',
-    excerpt: 'Su sıcaklığından öğütme derecesine, ön ıslatma süresinden dökme ritmine kadar — pour over\'ı bir ritüele dönüştürecek tüm detaylar.',
-    readTime: '9 dk',
-    date: '28 Ocak 2026',
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 3,
-    category: 'Köken & Terroir',
-    title: 'Etiyopya\'nın Gizli Bahçesi: Yirgacheffe\'nin Efsanesi',
-    excerpt: 'Kahvenin anavatanı sayılan Etiyopya\'nın dağlık ormanlarında büyüyen çekirdekler, dünya barista şampiyonlarının vazgeçilmezi.',
-    readTime: '7 dk',
-    date: '10 Ocak 2026',
-    image: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&q=80&auto=format&fit=crop',
-  },
-]
+import { blogPosts as posts } from '../data/blogPosts'
 
 export default function HomeBlogPreview() {
   const ref = useRef(null)
@@ -107,7 +78,7 @@ export default function HomeBlogPreview() {
                     <Clock size={12} />
                     {post.readTime} • {post.date}
                   </span>
-                  <Link to="/blog" className="text-espresso-red text-xs tracking-wider uppercase font-sans font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
+                  <Link to={`/blog/${post.slug}`} className="text-espresso-red text-xs tracking-wider uppercase font-sans font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all duration-300">
                     Oku <ArrowRight size={12} />
                   </Link>
                 </div>

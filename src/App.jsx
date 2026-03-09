@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
 import MenuPage from './pages/MenuPage'
 import BlogPage from './pages/BlogPage'
+import BlogPostPage from './pages/BlogPostPage'
 import ContactPage from './pages/ContactPage'
 import FranchisePage from './pages/FranchisePage'
 
@@ -23,6 +24,7 @@ export default function App() {
             <Route path="/hakkimizda" element={<AboutPage />} />
             <Route path="/menu" element={<MenuPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/iletisim" element={<ContactPage />} />
             <Route path="/franchise" element={<FranchisePage />} />
           </Routes>

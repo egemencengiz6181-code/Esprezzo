@@ -6,30 +6,27 @@ import { ArrowRight } from 'lucide-react'
 const featured = [
   {
     id: 1,
-    name: 'Signature Espresso',
-    category: 'Espresso Bazlılar',
-    description: 'Tek kökenli Etiyopya çekirdeği. Çikolatamsı gövde, narenciye finişi.',
-    price: '₺95',
-    badge: 'Şef Seçimi',
-    image: 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600&q=80&auto=format&fit=crop',
+    name: 'Espresso Macchiato',
+    category: 'Originals',
+    description: 'Espresso üzerine hafif süt köpüğü. Güçlü, saf ve nüanslı.',
+    badge: 'Originals',
+    image: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=600&q=80&auto=format&fit=crop',
   },
   {
-    id: 4,
-    name: 'Pour Over V60',
-    category: 'Filtre Kahveler',
-    description: 'Kolombiya Geisha. Floral notalar, taze çilek ve ıhlamur çiçeği.',
-    price: '₺130',
-    badge: 'En Çok Satan',
-    image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80&auto=format&fit=crop',
+    id: 2,
+    name: 'Esprezzo Con Panna',
+    category: 'Specialty',
+    description: 'Taze çırpılmış krema ile taçlandırılmış çift espresso. İmza içeceğimiz.',
+    badge: 'İmza',
+    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80&auto=format&fit=crop',
   },
   {
-    id: 7,
-    name: 'Cold Brew Reserve',
-    category: 'Soğuk İçecekler',
-    description: '24 saat soğuk demleme. Kadifemsi doku, doğal tatlılık.',
-    price: '₺140',
-    badge: 'Yeni',
-    image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&q=80&auto=format&fit=crop',
+    id: 3,
+    name: 'Salted Caramel Latte',
+    category: 'Exclusive',
+    description: 'Deniz tuzu ve karamelin mükemmel tezadı, kremsi latte üzerinde.',
+    badge: 'Exclusive',
+    image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&q=80&auto=format&fit=crop',
   },
 ]
 
@@ -100,11 +97,10 @@ export default function HomeMenuPreview() {
               </div>
               <div className="p-6">
                 <p className="text-espresso-red text-[10px] tracking-widest uppercase font-sans mb-2">{item.category}</p>
-                <div className="flex items-start justify-between gap-3 mb-3">
+                <div className="mb-3">
                   <h3 className="font-serif text-xl text-espresso-ivory group-hover:text-espresso-red transition-colors duration-300">
                     {item.name}
                   </h3>
-                  <span className="font-serif text-espresso-red font-semibold whitespace-nowrap">{item.price}</span>
                 </div>
                 <p className="text-espresso-muted text-sm font-sans font-light leading-relaxed">{item.description}</p>
               </div>
@@ -119,7 +115,7 @@ export default function HomeMenuPreview() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="flex flex-wrap justify-center gap-4 mt-12 pt-10 border-t border-espresso-border"
         >
-          {['Espresso Bazlılar', 'Filtre Kahveler', 'Soğuk İçecekler', 'Tatlılar'].map((cat) => (
+          {['Originals', 'Specialty', '3rd Wave', 'Exclusive'].map((cat) => (
             <Link
               key={cat}
               to="/menu"

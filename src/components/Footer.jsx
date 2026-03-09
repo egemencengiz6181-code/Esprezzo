@@ -86,10 +86,11 @@ export default function Footer() {
             transition={{ duration: 0.7, delay: 0.1 }}
           >
             <div className="mb-6">
-              <p className="font-serif text-3xl font-bold text-espresso-ivory leading-none">ESPREZZO</p>
-              <p className="text-[9px] tracking-[0.4em] uppercase text-espresso-red font-sans font-medium mt-1">
-                Premium Coffee
-              </p>
+              <img
+                src="/logo/Esprezzo%20logo%20beyaz.png"
+                alt="Esprezzo"
+                className="h-12 w-auto object-contain"
+              />
             </div>
             <p className="text-espresso-muted text-sm font-sans font-light leading-relaxed mb-8">
               2012'den bu yana kusursuz kahve deneyimi sunuyor, her fincanı özenle hazırlıyoruz.
@@ -178,9 +179,8 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm font-sans">
               {[
-                { day: 'Pazartesi – Cuma', hours: '07:00 – 22:00' },
-                { day: 'Cumartesi', hours: '08:00 – 23:00' },
-                { day: 'Pazar', hours: '09:00 – 21:00' },
+                { day: 'Pazartesi – Cuma', hours: '09:30 – 18:00' },
+                { day: 'Haftasonu', hours: 'Kapalı' },
               ].map(({ day, hours }) => (
                 <li key={day} className="flex justify-between gap-4">
                   <span className="text-espresso-muted">{day}</span>
@@ -190,10 +190,10 @@ export default function Footer() {
             </ul>
             <div className="mt-6 p-4 border border-espresso-red/20 bg-espresso-red/5">
               <p className="text-espresso-red text-xs tracking-wider uppercase font-sans font-semibold mb-1">
-                Şu an açık
+                Pazartesi – Cuma
               </p>
               <p className="text-espresso-muted text-xs font-sans">
-                Rezervasyon için arayabilirsiniz.
+                Haftasonu kapalıyız. 09:30–18:00 arası hizmetinizdeyiz.
               </p>
             </div>
           </motion.div>
@@ -204,7 +204,15 @@ export default function Footer() {
       <div className="border-t border-espresso-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-espresso-muted text-xs font-sans">
-            © 2026 Esprezzo. Tüm hakları saklıdır.
+            © 2026 Esprezzo. Tüm hakları saklıdır. by{' '}
+            <a
+              href="https://reneedesignlab.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-espresso-ivory transition-colors duration-300 underline underline-offset-2"
+            >
+              Renee Designlab.
+            </a>
           </p>
           <div className="flex gap-6">
             {['Gizlilik Politikası', 'Kullanım Koşulları', 'KVKK'].map((item) => (
