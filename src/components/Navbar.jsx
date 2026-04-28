@@ -8,7 +8,7 @@ const navLinks = [
   { label: 'Hakkımızda', href: '/hakkimizda' },
   { label: 'Menü', href: '/menu' },
   { label: 'Blog', href: '/blog' },
-  { label: 'Franchise', href: '/franchise' },
+  { label: 'FRANCHISE', href: '/franchise' },
   { label: 'İletişim', href: '/iletisim' },
 ]
 

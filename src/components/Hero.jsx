@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowDown, ChevronRight } from 'lucide-react'
+import { useData } from '../context/DataContext'
 
 const HERO_IMAGE =
   'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=1800&q=85&auto=format&fit=crop'
@@ -12,6 +13,11 @@ export default function Hero() {
   const imgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%'])
   const textY = useTransform(scrollYProgress, [0, 1], ['0%', '15%'])
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
+  const { content } = useData()
+  const hero = content?.hero ?? {}
+  const heroTitle = hero.title ?? 'PREMIUM Coffee EXPERIENCE'
+  const heroSubtitle = hero.subtitle ?? 'Her yudumda kusursuzluk. Kahvenin ötesinde bir deneyim.'
+  const heroButton = hero.buttonText ?? 'Menüyü Keşfet'
 
   const handleScroll = () =>
     document.querySelector('#home-content')?.scrollIntoView({ behavior: 'smooth' })
@@ -46,7 +52,7 @@ export default function Hero() {
           transition={{ duration: 1.2, delay: 0.2 }}
           className="section-label mb-6"
         >
-          Premium Coffee Experience
+          {heroTitle}
         </motion.p>
 
         <motion.h1
@@ -75,8 +81,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 1.1 }}
           className="text-white/70 font-sans font-light text-lg md:text-xl lg:text-2xl tracking-wide mb-12 max-w-xl mx-auto"
         >
-          Her yudumda kusursuzluk.<br />
-          <span className="text-espresso-red italic font-serif">Kahvenin ötesinde bir deneyim.</span>
+          {heroSubtitle}
         </motion.p>
 
         <motion.div
@@ -86,7 +91,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
           <Link to="/menu" className="btn-primary group">
-            Menüyü Keşfet
+            {heroButton}
             <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
           <Link to="/hakkimizda" className="btn-outline">

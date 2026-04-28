@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CheckCircle, Send, ChevronLeft, ChevronRight } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import { useData } from '../context/DataContext'
 
-const IMAGE =
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1800&q=85&auto=format&fit=crop'
+const IMAGE = '/cafe/cafe2-franchise.png'
 
 const STEPS = [
   'Kişisel Bilgiler',
@@ -72,6 +72,8 @@ export default function FranchisePage() {
   const [form, setForm] = useState(INITIAL)
   const [sent, setSent] = useState(false)
   const [direction, setDirection] = useState(1)
+  const { content } = useData()
+  const fr = content?.franchise ?? {}
 
   const set = (field, value) => setForm((f) => ({ ...f, [field]: value }))
   const handle = (e) => set(e.target.name, e.target.type === 'checkbox' ? e.target.checked : e.target.value)
@@ -100,11 +102,12 @@ export default function FranchisePage() {
   return (
     <>
       <PageHero
-        label="İş Birliği Fırsatı"
-        title="Franchise Başvurusu"
-        subtitle="Formu eksiksiz doldurun. Franchise ekibimiz 2 iş günü içinde sizinle iletişime geçecektir."
+        label={fr.label ?? 'İş Birliği Fırsatı'}
+        title={fr.title ?? 'Franchise Başvurusu'}
+        subtitle={fr.subtitle ?? 'Formu eksiksiz doldurun. Franchise ekibimiz 2 iş günü içinde sizinle iletişime geçecektir.'}
         image={IMAGE}
         breadcrumb="Franchise"
+        imagePosition="object-center"
       />
 
       <section className="py-20 bg-espresso-black relative overflow-hidden">

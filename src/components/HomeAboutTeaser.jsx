@@ -2,12 +2,16 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import { useData } from '../context/DataContext'
 
 const IMAGE = 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop'
 
 export default function HomeAboutTeaser() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { content } = useData()
+  const aboutParagraph = content?.about?.paragraphs?.[0] ??
+    'Esprezzo, 2012 yılında kahveye olan derin tutkuyla doğdu. İtalyan espresso geleneğini modern bir dokunuu015fla harmanlayarak her fincanı bir sanat eserine dönüştürüyoruz. Dünya’nın en seçkin kahve bahçelerinden temin ettiğimiz organik çekirdekler ve uzman barista kadromuz bir arada.'
 
   const fadeUp = (delay = 0) => ({
     hidden: { opacity: 0, y: 40 },
@@ -57,9 +61,7 @@ export default function HomeAboutTeaser() {
             </motion.h2>
             <motion.div variants={fadeUp(0.25)} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="divider-red" />
             <motion.p variants={fadeUp(0.3)} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="section-subtitle">
-              Esprezzo, 2012 yılında kahveye olan derin tutkuyla doğdu. İtalyan espresso geleneğini modern
-              bir dokunuşla harmanlayarak her fincanı bir sanat eserine dönüştürüyoruz. Dünya'nın en seçkin
-              kahve bahçelerinden temin ettiğimiz organik çekirdekler ve uzman barista kadromuz bir arada.
+              {aboutParagraph}
             </motion.p>
             <motion.blockquote
               variants={fadeUp(0.35)}

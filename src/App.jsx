@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext'
+import { DataProvider } from './context/DataContext'
 import Layout from './components/Layout'
 import HomePage from './pages/HomePage'
 import AboutPage from './pages/AboutPage'
@@ -16,6 +17,7 @@ export default function App() {
   }, [])
 
   return (
+    <DataProvider>
     <ThemeProvider>
       <BrowserRouter>
         <Layout>
@@ -31,5 +33,6 @@ export default function App() {
         </Layout>
       </BrowserRouter>
     </ThemeProvider>
+    </DataProvider>
   )
 }

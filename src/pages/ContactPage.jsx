@@ -2,6 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Mail, Phone, MapPin, Clock, Send, Instagram, Twitter, Youtube, Facebook } from 'lucide-react'
 import PageHero from '../components/PageHero'
+import { useData } from '../context/DataContext'
 
 const IMAGE = 'https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=1800&q=85&auto=format&fit=crop'
 
@@ -10,16 +11,11 @@ const fadeUp = (delay = 0) => ({
   visible: { opacity: 1, y: 0, transition: { duration: 0.8, delay, ease: [0.25, 0.46, 0.45, 0.94] } },
 })
 
-const socials = [
-  { icon: Instagram, label: 'Instagram', href: '#', handle: '@esprezzo.coffee' },
-  { icon: Twitter, label: 'X / Twitter', href: '#', handle: '@esprezzo' },
-  { icon: Youtube, label: 'YouTube', href: '#', handle: 'Esprezzo TV' },
-  { icon: Facebook, label: 'Facebook', href: '#', handle: 'Esprezzo Coffee' },
-]
-
-const hours = [
-  { day: 'Pazartesi – Cuma', hours: '09:30 – 18:00' },
-  { day: 'Haftasonu', hours: 'Kapalı' },
+const staticSocials = [
+  { icon: Instagram, label: 'Instagram', handle: '@esprezzo.coffee', key: 'instagramUrl' },
+  { icon: Twitter, label: 'X / Twitter', handle: '@esprezzo', key: 'twitterUrl' },
+  { icon: Youtube, label: 'YouTube', handle: 'Esprezzo TV', key: null },
+  { icon: Facebook, label: 'Facebook', handle: 'Esprezzo Coffee', key: 'facebookUrl' },
 ]
 
 export default function ContactPage() {
@@ -27,6 +23,25 @@ export default function ContactPage() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' })
   const [sent, setSent] = useState(false)
+  const { settings } = useData()
+  const sc = settings?.contact ?? {}
+  const wh = settings?.workingHours ?? {}
+
+  const contactItems = [
+    { icon: MapPin, title: 'Adres', content: sc.address ?? '' },
+    { icon: Phone, title: 'Telefon', content: sc.phone ?? '' },
+    { icon: Mail, title: 'E-posta', content: sc.email ?? '' },
+  ]
+  const hours = [
+    { day: 'Pazartesi – Cuma', hours: wh.mondayFriday ?? '' },
+    { day: 'Cumartesi', hours: wh.saturday ?? '' },
+    { day: 'Pazar', hours: wh.sunday ?? '' },
+  ].filter((h) => h.hours)
+
+  const socials = staticSocials.map((s) => ({
+    ...s,
+    href: s.key ? (sc[s.key] ?? '#') : '#',
+  }))
 
   const handleChange = (e) => setForm((f) => ({ ...f, [e.target.name]: e.target.value }))
   const handleSubmit = (e) => {
@@ -67,11 +82,7 @@ export default function ContactPage() {
 
               {/* Contact details */}
               <motion.div variants={fadeUp(0.15)} initial="hidden" animate={inView ? 'visible' : 'hidden'} className="space-y-5">
-                {[
-                  { icon: MapPin, title: 'Adres', content: 'Odtü Fizik Bölümü\n06530 Çankaya/Ankara' },
-                  { icon: Phone, title: 'Telefon', content: '(0312) 750 03 85' },
-                  { icon: Mail, title: 'E-posta', content: 'merhaba@esprezzo.com.tr' },
-                ].map(({ icon: Icon, title, content }) => (
+                {contactItems.map(({ icon: Icon, title, content }) => (
                   <div key={title} className="flex items-start gap-4 p-5 card-dark group">
                     <div className="w-10 h-10 border border-espresso-border group-hover:border-espresso-red flex items-center justify-center flex-shrink-0 transition-colors duration-300">
                       <Icon size={18} className="text-espresso-red" />

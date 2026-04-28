@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight, Clock, User, Calendar } from 'lucide-react'
-import { blogPosts } from '../data/blogPosts'
+import { useData } from '../context/DataContext'
 import PageHero from '../components/PageHero'
 
 function renderBody(body) {
@@ -48,6 +48,7 @@ function renderBody(body) {
 export default function BlogPostPage() {
   const { slug } = useParams()
   const navigate = useNavigate()
+  const { blog: blogPosts } = useData()
 
   const index = blogPosts.findIndex((p) => p.slug === slug)
   const post = blogPosts[index]

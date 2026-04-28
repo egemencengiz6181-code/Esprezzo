@@ -2,9 +2,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Clock } from 'lucide-react'
-import { blogPosts as posts } from '../data/blogPosts'
+import { useData } from '../context/DataContext'
 
 export default function HomeBlogPreview() {
+  const { blog: posts } = useData()
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
 

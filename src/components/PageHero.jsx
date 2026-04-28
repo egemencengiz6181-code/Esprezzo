@@ -2,12 +2,12 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ChevronRight } from 'lucide-react'
 
-export default function PageHero({ label, title, subtitle, image, breadcrumb }) {
+export default function PageHero({ label, title, subtitle, image, breadcrumb, imagePosition = 'object-center' }) {
   return (
     <section className="relative h-72 md:h-96 flex items-end overflow-hidden pt-20">
       {/* Background */}
       <div className="absolute inset-0">
-        <img src={image} alt={title} className="w-full h-full object-cover" />
+        <img src={image} alt={title} className={`w-full h-full object-cover ${imagePosition}`} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black" />
       </div>
 

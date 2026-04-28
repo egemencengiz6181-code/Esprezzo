@@ -2,13 +2,7 @@ import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Instagram, Twitter, Youtube, Facebook, Mail, Phone, MapPin, ArrowRight, Send } from 'lucide-react'
-
-const socials = [
-  { icon: Instagram, label: 'Instagram', href: '#' },
-  { icon: Twitter, label: 'X / Twitter', href: '#' },
-  { icon: Youtube, label: 'YouTube', href: '#' },
-  { icon: Facebook, label: 'Facebook', href: '#' },
-]
+import { useData } from '../context/DataContext'
 
 const quickLinks = [
   { label: 'Hakkımızda', href: '/hakkimizda' },
@@ -24,6 +18,17 @@ export default function Footer() {
   const inView = useInView(ref, { once: true, margin: '-60px' })
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
+  const { settings } = useData()
+  const sc = settings?.contact ?? {}
+  const wh = settings?.workingHours ?? {}
+  const ft = settings?.footer ?? {}
+
+  const socials = [
+    { icon: Instagram, label: 'Instagram', href: sc.instagramUrl || '#' },
+    { icon: Twitter, label: 'X / Twitter', href: sc.twitterUrl || '#' },
+    { icon: Youtube, label: 'YouTube', href: '#' },
+    { icon: Facebook, label: 'Facebook', href: sc.facebookUrl || '#' },
+  ]
 
   const handleSubscribe = (e) => {
     e.preventDefault()
@@ -145,24 +150,24 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-espresso-muted text-sm font-sans">
                 <MapPin size={16} className="text-espresso-red mt-0.5 flex-shrink-0" />
-                <span>Odtü Fizik Bölümü<br />06530 Çankaya/Ankara</span>
+                <span style={{ whiteSpace: 'pre-line' }}>{sc.address || ''}</span>
               </li>
               <li>
                 <a
-                  href="tel:+903127500385"
+                  href={sc.phone ? `tel:${sc.phone.replace(/[^+\d]/g, '')}` : '#'}
                   className="flex items-center gap-3 text-espresso-muted hover:text-espresso-ivory text-sm font-sans transition-colors duration-300"
                 >
                   <Phone size={16} className="text-espresso-red flex-shrink-0" />
-                  (0312) 750 03 85
+                  {sc.phone || ''}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:merhaba@esprezzo.com.tr"
+                  href={sc.email ? `mailto:${sc.email}` : '#'}
                   className="flex items-center gap-3 text-espresso-muted hover:text-espresso-ivory text-sm font-sans transition-colors duration-300"
                 >
                   <Mail size={16} className="text-espresso-red flex-shrink-0" />
-                  merhaba@esprezzo.com.tr
+                  {sc.email || ''}
                 </a>
               </li>
             </ul>
@@ -179,9 +184,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-sm font-sans">
               {[
-                { day: 'Pazartesi – Cuma', hours: '09:30 – 18:00' },
-                { day: 'Haftasonu', hours: 'Kapalı' },
-              ].map(({ day, hours }) => (
+                { day: 'Pazartesi – Cuma', hours: wh.mondayFriday },
+                { day: 'Cumartesi', hours: wh.saturday },
+                { day: 'Pazar', hours: wh.sunday },
+              ].filter((r) => r.hours).map(({ day, hours }) => (
                 <li key={day} className="flex justify-between gap-4">
                   <span className="text-espresso-muted">{day}</span>
                   <span className="text-espresso-ivory font-medium">{hours}</span>
@@ -193,7 +199,7 @@ export default function Footer() {
                 Pazartesi – Cuma
               </p>
               <p className="text-espresso-muted text-xs font-sans">
-                Haftasonu kapalıyız. 09:30–18:00 arası hizmetinizdeyiz.
+                {wh.specialNote || ''}
               </p>
             </div>
           </motion.div>
@@ -204,7 +210,7 @@ export default function Footer() {
       <div className="border-t border-espresso-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-espresso-muted text-xs font-sans">
-            © 2026 Esprezzo. Tüm hakları saklıdır. by{' '}
+            {ft.copyrightText || '© 2026 Esprezzo.'} by{' '}
             <a
               href="https://reneedesignlab.com"
               target="_blank"

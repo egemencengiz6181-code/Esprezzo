@@ -1,7 +1,7 @@
 import PageHero from '../components/PageHero'
 import About from '../components/About'
 
-const IMAGE = 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1800&q=85&auto=format&fit=crop'
+const IMAGE = '/cafe/cafe.jpg'
 
 export default function AboutPage() {
   return (
@@ -12,6 +12,7 @@ export default function AboutPage() {
         subtitle="Kahveyle başlayan, tutkuyla büyüyen bir yolculuk."
         image={IMAGE}
         breadcrumb="Hakkımızda"
+        imagePosition="object-[75%]"
       />
       <About />
     </>

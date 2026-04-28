@@ -2,37 +2,13 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-
-const featured = [
-  {
-    id: 1,
-    name: 'Espresso Macchiato',
-    category: 'Originals',
-    description: 'Espresso üzerine hafif süt köpüğü. Güçlü, saf ve nüanslı.',
-    badge: 'Originals',
-    image: 'https://images.unsplash.com/photo-1521302080334-4bebac2763a6?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 2,
-    name: 'Esprezzo Con Panna',
-    category: 'Specialty',
-    description: 'Taze çırpılmış krema ile taçlandırılmış çift espresso. İmza içeceğimiz.',
-    badge: 'İmza',
-    image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&q=80&auto=format&fit=crop',
-  },
-  {
-    id: 3,
-    name: 'Salted Caramel Latte',
-    category: 'Exclusive',
-    description: 'Deniz tuzu ve karamelin mükemmel tezadı, kremsi latte üzerinde.',
-    badge: 'Exclusive',
-    image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=600&q=80&auto=format&fit=crop',
-  },
-]
+import { useData } from '../context/DataContext'
 
 export default function HomeMenuPreview() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { products } = useData()
+  const featured = products.filter((p) => p.badge).slice(0, 3)
 
   return (
     <section ref={ref} className="py-28 bg-espresso-black relative">

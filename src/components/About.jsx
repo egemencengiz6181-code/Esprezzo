@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { Coffee, Award, Leaf, Clock } from 'lucide-react'
+import { useData } from '../context/DataContext'
 
 const ABOUT_IMAGE =
   'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85&auto=format&fit=crop'
@@ -25,6 +26,12 @@ const fadeUp = {
 export default function About() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-80px' })
+  const { content } = useData()
+  const about = content?.about ?? {}
+  const paragraphs = about.paragraphs ?? [
+    'Esprezzo, 2012 yılında kahveye olan derin tutkuyla doğdu. İtalyan espresso geleneğini modern bir dokunuu015fla harmanlayarak, her fincanı bir sanat eserine dönüştürüyoruz.',
+    'Dünya’nın en seçkin kahve bahçelerinden temin ettiğimiz organik çekirdekleri, uzman barista kadromuzla işleyerek misafirlerimize eşsiz bir lezzet sunuyoruz. Her detay, her sıcaklık, her tat — bileşimli bir tercih.',
+  ]
 
   return (
     <section id="about" ref={ref} className="py-28 md:py-36 bg-espresso-black relative overflow-hidden">
@@ -108,8 +115,7 @@ export default function About() {
               custom={0.35}
               className="section-subtitle"
             >
-              Esprezzo, 2012 yılında kahveye olan derin tutkuyla doğdu. İtalyan espresso geleneğini
-              modern bir dokunuşla harmanlayarak, her fincanı bir sanat eserine dönüştürüyoruz.
+              {paragraphs[0]}
             </motion.p>
 
             <motion.p
@@ -119,9 +125,7 @@ export default function About() {
               custom={0.4}
               className="section-subtitle"
             >
-              Dünya'nın en seçkin kahve bahçelerinden temin ettiğimiz organik çekirdekleri, uzman
-              barista kadromuzla işleyerek misafirlerimize eşsiz bir lezzet sunuyoruz. Her detay,
-              her sıcaklık, her tat — bilinçli bir tercih.
+              {paragraphs[1]}
             </motion.p>
 
             <motion.blockquote
