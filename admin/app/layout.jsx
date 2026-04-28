@@ -1,6 +1,7 @@
 import './globals.css'
 import { AdminDataProvider } from '@/context/AdminDataContext'
 import { ToastProvider } from '@/components/ToastProvider'
+import AuthGuard from '@/components/AuthGuard'
 
 export const metadata = {
   title: 'Esprezzo Admin',
@@ -12,7 +13,9 @@ export default function RootLayout({ children }) {
     <html lang="tr">
       <body>
         <AdminDataProvider>
-          <ToastProvider>{children}</ToastProvider>
+          <ToastProvider>
+            <AuthGuard>{children}</AuthGuard>
+          </ToastProvider>
         </AdminDataProvider>
       </body>
     </html>

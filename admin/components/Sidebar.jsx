@@ -1,7 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
+import { createClient } from '@/lib/supabase/client'
 import {
   LayoutDashboard,
   Coffee,
@@ -26,6 +27,13 @@ const navSettings = [
 
 export default function Sidebar({ collapsed, onToggle }) {
   const pathname = usePathname()
+  const router = useRouter()
+
+  const handleSignOut = async () => {
+    const supabase = createClient()
+    await supabase.auth.signOut()
+    router.push('/login')
+  }
 
   return (
     <>
@@ -116,16 +124,14 @@ export default function Sidebar({ collapsed, onToggle }) {
 
         {/* Logout */}
         <div className="border-t border-gray-100 px-3 py-3">
-          <form action="/auth/signout" method="POST">
-            <button
-              type="submit"
-              className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-500 hover:bg-red-50 hover:text-red-600 transition-colors w-full ${collapsed ? 'justify-center' : ''}`}
-              title={collapsed ? 'Çıkış Yap' : undefined}
-            >
-              <LogOut size={18} />
-              {!collapsed && 'Çıkış Yap'}
-            </button>
-          </form>
+          <button
+            onClick={handleSignOut}
+            className={`flex items-center gap-3 px-3 py-2 rounded-lg text-sm text-gray-500 hover:bg-red-50 hover:text-red-600 transition-colors w-full ${collapsed ? 'justify-center' : ''}`}
+            title={collapsed ? 'Çıkış Yap' : undefined}
+          >
+            <LogOut size={18} />
+            {!collapsed && 'Çıkış Yap'}
+          </button>
         </div>
       </aside>
     </>
